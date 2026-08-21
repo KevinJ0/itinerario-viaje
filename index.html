@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b6e6a">
+<title>Itinerario · La Romana → Puerto Plata → Cabrera</title>
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Amatic+SC:wght@400;700&display=swap');
+:root {
+  --teal:#0b6e6a; --teal-dark:#084f4c; --sand:#f6f1e7; --paper:#ffffff;
+  --ink:#1c2b33; --muted:#6b7a82; --line:#e6e0d5;
+  --d1:#2e7d32; --d2:#1565c0; --d3:#ef6c00; --d4:#c62828;
+  --font-display:'Caveat',cursive;
+  --pill:999px;
+  --radius:28px; --shadow:0 6px 24px rgba(28,43,51,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--sand);color:var(--ink);line-height:1.5;min-height:100vh}
+.hero{position:relative;background:linear-gradient(160deg,var(--teal) 0%,var(--teal-dark) 55%,#063a38 100%);background-size:220% 220%;animation:gradShift 16s ease infinite;color:#fff;padding:calc(env(safe-area-inset-top) + 28px) 20px 30px;overflow:hidden;border-radius:0 0 var(--radius) var(--radius)}
+.hero::after{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 70%)}
+.kicker{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);font-weight:600}
+.hero h1{font-family:var(--font-display);font-size:2.4rem;line-height:1.1;font-weight:700;margin:8px 0 6px;letter-spacing:0}
+.hero .sub{font-size:.98rem;color:rgba(255,255,255,.82);font-weight:500}
+.hero .dates{display:inline-block;margin-top:12px;font-size:.82rem;font-weight:600;color:#d6f2ec;background:rgba(255,255,255,.1);padding:5px 14px;border-radius:var(--pill);border:1px solid rgba(255,255,255,.18)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:var(--pill);padding:12px 10px;text-align:center;backdrop-filter:blur(4px);animation:statBob 4s ease-in-out infinite}
+.stat:nth-child(2){animation-delay:.5s}
+.stat:nth-child(3){animation-delay:1s}
+.stat .num{font-size:1.35rem;font-weight:800;line-height:1.1}
+.stat .lbl{font-size:.72rem;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+.mini-bar{position:fixed;top:0;left:0;right:0;z-index:95;background:linear-gradient(160deg,var(--teal),var(--teal-dark));color:#fff;padding:calc(env(safe-area-inset-top) + 6px) 12px 8px;transform:translateY(-110%);transition:transform .3s ease;box-shadow:0 4px 16px rgba(0,0,0,.25);border-radius:0 0 var(--radius) var(--radius)}
+.mini-bar.show{transform:translateY(0)}
+.mini-title{font-family:var(--font-display);font-size:1.4rem;font-weight:700;line-height:1;text-align:center;margin-bottom:6px}
+.mini-chips{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+.mini-chips::-webkit-scrollbar{display:none}
+.mini-bar .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:.72rem;padding:4px 10px}
+.mini-bar .chip.sep{color:rgba(255,255,255,.6);background:transparent;border:none;padding:4px 2px}
+.mini-bar .chip .dot{width:7px;height:7px}
+.routeflow{display:flex;gap:8px;padding:12px 14px;margin:16px;overflow-x:auto;background:var(--paper);border-radius:var(--pill);box-shadow:0 8px 26px rgba(28,43,51,.14);-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;animation:floatCard 5s ease-in-out infinite}
+.routeflow::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;scroll-snap-align:start;display:flex;align-items:center;gap:6px;background:#f0f4f3;border:1px solid var(--line);color:var(--ink);font-size:.82rem;font-weight:600;padding:8px 15px;border-radius:var(--pill);white-space:nowrap;transition:transform .2s ease,background .2s ease}
+.chip:hover{transform:translateY(-2px)}
+.chip .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.chip.sep{color:var(--muted);font-weight:400;background:transparent;border:none;padding:8px 2px}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+.section-title{position:relative;display:inline-block;font-family:var(--font-display);font-size:1.5rem;text-transform:none;letter-spacing:0;color:var(--teal-dark);font-weight:700;margin:6px 4px 14px;padding-bottom:4px}
+.section-title::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;background:linear-gradient(90deg,var(--teal),#d4a373);border-radius:3px;transform:scaleX(0);transform-origin:left;animation:underline 1s ease forwards .4s}
+.day{position:relative;background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden;transition:box-shadow .3s ease}
+.day:hover{box-shadow:0 16px 40px rgba(28,43,51,.16)}
+.day-head{position:relative;display:flex;align-items:center;gap:12px;padding:16px 18px 14px;background:var(--dc);color:#fff;overflow:hidden}
+.day-head::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.22),rgba(255,255,255,0) 55%);pointer-events:none}
+.day-head > *{position:relative;z-index:1}
+.day-badge{flex:0 0 auto;width:48px;height:48px;border-radius:var(--pill);display:grid;place-items:center;background:#fff;color:var(--dc);font-weight:800;font-size:.82rem;text-align:center;line-height:1.05;box-shadow:0 2px 8px rgba(0,0,0,.2);animation:badgePulse 3s ease-in-out infinite}
+.day-hd{flex:1;min-width:0}
+.day-title{font-family:var(--font-display);font-size:1.6rem;font-weight:700;letter-spacing:0;line-height:1.05;color:#fff}
+.day-route{font-size:.83rem;color:rgba(255,255,255,.85);margin-top:2px;font-weight:500}
+.day-meta{margin-left:auto;text-align:right;flex:0 0 auto}
+.day-meta .km{font-weight:800;font-size:1.05rem;color:#fff}
+.day-meta .tm{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;color:rgba(255,255,255,.85);font-weight:600}
+.day-meta .tm i{font-size:11px}
+.legs{padding:10px 18px 18px}
+.leg{position:relative;display:flex;gap:12px;padding:12px 0}
+.leg:not(:last-child)::before{content:"";position:absolute;left:12px;top:44px;bottom:-6px;width:2px;background:var(--line)}
+.node{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;z-index:1}
+.node i{font-size:13px;color:#fff}
+.body{flex:1;min-width:0}
+.name{font-weight:700;font-size:.95rem}
+.desc{font-size:.8rem;color:var(--muted);margin-top:1px}
+.row{display:flex;align-items:center;gap:10px;margin-top:4px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;font-weight:700;color:var(--muted);background:#f3f1ec;border-radius:var(--pill);padding:3px 10px}
+.arrival{flex:0 0 auto;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;color:#fff;font-weight:800;font-size:.8rem;padding:5px 14px;border-radius:var(--pill);white-space:nowrap;box-shadow:0 2px 6px rgba(28,43,51,.15);animation:beat 2.4s ease-in-out infinite}
+.arrival i{font-size:12px}
+.nav{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:800;padding:6px 15px;border-radius:var(--pill);text-decoration:none;background:#fff;border:1.5px solid currentColor;letter-spacing:.02em;transition:transform .2s ease,box-shadow .2s ease}
+.nav:hover{transform:scale(1.07);box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.nav:active{transform:scale(.95)}
+.nav i{font-size:12px}
+.summary{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+.summary h2{font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin-bottom:12px}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.sum-row:last-of-type{border-bottom:none}
+.sum-row .k{color:var(--muted);font-weight:600}
+.sum-row .v{font-weight:800;text-align:right}
+.sum-row.total{margin-top:6px}
+.sum-row.total .v{font-size:1.15rem;color:var(--teal);animation:colorPulse 2.6s ease-in-out infinite}
+.footnote{text-align:center;font-size:.72rem;color:var(--muted);margin-top:22px;padding:0 12px}
+.bg-icons{position:absolute;inset:0;pointer-events:none;z-index:0}
+.bg-icons i{position:absolute;color:rgba(255,255,255,.16);animation:floaty var(--d,12s) ease-in-out infinite}
+.bg-fixed{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bg-fixed i{position:absolute;color:rgba(11,110,106,.10);animation:floaty var(--d,12s) ease-in-out infinite}
+.hero,.routeflow,.wrap{position:relative;z-index:1}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(6deg)}}
+@keyframes drift{0%{transform:translateX(0) rotate(0deg)}50%{transform:translateX(18px) rotate(-8deg)}100%{transform:translateX(0) rotate(0deg)}}
+@keyframes spin-slow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.hero > *:not(.bg-icons){position:relative;z-index:1}
+.js .day,.js .summary,.js .section-title{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,.9,.36,1),box-shadow .3s ease}
+.js .day.in,.js .summary.in,.js .section-title.in{opacity:1;transform:translateY(0)}
+.js .day.in:hover{transform:translateY(-4px)}
+.node{animation:breathe 3s ease-in-out infinite}
+.leg:nth-child(2) .node{animation-delay:.4s}
+.leg:nth-child(3) .node{animation-delay:.8s}
+.leg:nth-child(4) .node{animation-delay:1.2s}
+.leg:nth-child(5) .node{animation-delay:1.6s}
+@keyframes gradShift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes statBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes colorPulse{0%,100%{opacity:1}50%{opacity:.55}}
+@keyframes underline{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}.js .day,.js .summary,.js .section-title{opacity:1;transform:none}}
+@media(min-width:640px){.hero{padding-left:32px;padding-right:32px}.hero h1{font-size:2.2rem}.stats{gap:14px}.routeflow{max-width:720px;margin:16px auto}}
+</style>
+</head>
+<body>
+<div class="bg-fixed" aria-hidden="true"><i class="fa-solid fa-plane" style="font-size:44px;top:14%;left:6%;--d:11s;"></i><i class="fa-solid fa-umbrella-beach" style="font-size:40px;top:58%;left:10%;--d:13s;animation-name:drift;"></i><i class="fa-solid fa-suitcase" style="font-size:34px;top:22%;left:80%;--d:12s;"></i><i class="fa-solid fa-mountain-sun" style="font-size:42px;top:46%;left:84%;--d:15s;animation-name:drift;"></i><i class="fa-solid fa-camera" style="font-size:30px;top:76%;left:22%;--d:10s;"></i><i class="fa-solid fa-compass" style="font-size:36px;top:6%;left:70%;--d:14s;animation-name:spin-slow;"></i><i class="fa-solid fa-map-location-dot" style="font-size:32px;top:82%;left:72%;--d:12s;animation-name:drift;"></i><i class="fa-solid fa-ship" style="font-size:40px;top:34%;left:40%;--d:16s;animation-name:drift;"></i><i class="fa-solid fa-sun" style="font-size:28px;top:8%;left:30%;--d:9s;animation-name:spin-slow;"></i><i class="fa-solid fa-location-dot" style="font-size:30px;top:68%;left:58%;--d:12s;"></i><i class="fa-solid fa-mug-hot" style="font-size:30px;top:30%;left:14%;--d:14s;animation-name:drift;"></i><i class="fa-solid fa-person-hiking" style="font-size:34px;top:56%;left:66%;--d:13s;animation-name:drift;"></i><i class="fa-solid fa-tree" style="font-size:36px;top:86%;left:30%;--d:15s;"></i><i class="fa-solid fa-water" style="font-size:30px;top:12%;left:52%;--d:11s;animation-name:drift;"></i><i class="fa-solid fa-utensils" style="font-size:32px;top:72%;left:8%;--d:14s;"></i><i class="fa-solid fa-route" style="font-size:34px;top:40%;left:90%;--d:13s;animation-name:drift;"></i></div>
+
+  <header class="hero" id="hero">
+    <div class="bg-icons"><i class="fa-solid fa-plane" style="font-size:44px;top:14%;left:6%;--d:11s;"></i><i class="fa-solid fa-umbrella-beach" style="font-size:40px;top:58%;left:10%;--d:13s;animation-name:drift;"></i><i class="fa-solid fa-suitcase" style="font-size:34px;top:22%;left:80%;--d:12s;"></i><i class="fa-solid fa-mountain-sun" style="font-size:42px;top:46%;left:84%;--d:15s;animation-name:drift;"></i><i class="fa-solid fa-camera" style="font-size:30px;top:76%;left:22%;--d:10s;"></i><i class="fa-solid fa-compass" style="font-size:36px;top:6%;left:70%;--d:14s;animation-name:spin-slow;"></i><i class="fa-solid fa-map-location-dot" style="font-size:32px;top:82%;left:72%;--d:12s;animation-name:drift;"></i><i class="fa-solid fa-ship" style="font-size:40px;top:34%;left:40%;--d:16s;animation-name:drift;"></i><i class="fa-solid fa-sun" style="font-size:28px;top:8%;left:30%;--d:9s;animation-name:spin-slow;"></i><i class="fa-solid fa-location-dot" style="font-size:30px;top:68%;left:58%;--d:12s;"></i><i class="fa-solid fa-mug-hot" style="font-size:30px;top:30%;left:14%;--d:14s;animation-name:drift;"></i><i class="fa-solid fa-person-hiking" style="font-size:34px;top:56%;left:66%;--d:13s;animation-name:drift;"></i><i class="fa-solid fa-tree" style="font-size:36px;top:86%;left:30%;--d:15s;"></i><i class="fa-solid fa-water" style="font-size:30px;top:12%;left:52%;--d:11s;animation-name:drift;"></i><i class="fa-solid fa-utensils" style="font-size:32px;top:72%;left:8%;--d:14s;"></i><i class="fa-solid fa-route" style="font-size:34px;top:40%;left:90%;--d:13s;animation-name:drift;"></i></div>
+    <div class="kicker">Ruta por carretera</div>
+    <h1>La Romana &rarr; Puerto Plata &rarr; Cabrera</h1>
+    <div class="sub">Rep&uacute;blica Dominicana · 4 d&iacute;as · 3 noches</div>
+    <div class="dates">Jueves a domingo</div>
+    <div class="stats">
+      <div class="stat"><div class="num">4</div><div class="lbl">D&iacute;as</div></div>
+      <div class="stat"><div class="num">779</div><div class="lbl">Km</div></div>
+      <div class="stat"><div class="num">~14h</div><div class="lbl">Manejo</div></div>
+    </div>
+  </header>
+
+  <nav class="routeflow" aria-label="Recorrido">
+    <div class="chip"><span class="dot" style="background:var(--d1)"></span>La Romana</div><div class="chip sep">&rarr;</div><div class="chip"><span class="dot" style="background:var(--d1)"></span>Santo Domingo</div><div class="chip sep">&rarr;</div><div class="chip"><span class="dot" style="background:var(--d2)"></span>Puerto Plata</div><div class="chip sep">&rarr;</div><div class="chip"><span class="dot" style="background:var(--d3)"></span>Cabrera</div><div class="chip sep">&rarr;</div><div class="chip"><span class="dot" style="background:var(--d4)"></span>La Romana</div>
+  </nav>
+
+  <header class="mini-bar" id="miniBar" aria-hidden="true">
+    <div class="mini-title">La Romana &rarr; Puerto Plata &rarr; Cabrera</div>
+    <div class="mini-chips"><div class="chip"><span class="dot" style="background:var(--d1)"></span>La Romana</div><div class="chip sep">&rarr;</div><div class="chip"><span class="dot" style="background:var(--d1)"></span>Santo Domingo</div><div class="chip sep">&rarr;</div><div class="chip"><span class="dot" style="background:var(--d2)"></span>Puerto Plata</div><div class="chip sep">&rarr;</div><div class="chip"><span class="dot" style="background:var(--d3)"></span>Cabrera</div><div class="chip sep">&rarr;</div><div class="chip"><span class="dot" style="background:var(--d4)"></span>La Romana</div></div>
+  </header>
+
+  <main class="wrap">
+    <h2 class="section-title">Itinerario d&iacute;a por d&iacute;a</h2>
+
+    
+    <section class="day" style="--dc:var(--d1)">
+      <div class="day-head">
+        <div class="day-badge">D&iacute;a<br>1</div>
+        <div class="day-hd">
+          <div class="day-title">Jueves</div>
+          <div class="day-route">La Romana &rarr; Puerto Plata</div>
+        </div>
+        <div class="day-meta">
+          <div class="km">330 km</div>
+          <div class="tm"><i class="fa-solid fa-clock"></i><span>5h 45m</span></div>
+        </div>
+      </div>
+      <div class="legs"><div class="leg"><div class="node" style="background:var(--d1)"><i class="fa-solid fa-house"></i></div><div class="body"><div class="name">La Romana</div><div class="desc">Salida temprano por la autopista del este</div></div><div class="arrival" style="background:var(--d1)"><i class="fa-solid fa-clock"></i><span>6:00 am</span></div></div><div class="leg"><div class="node" style="background:var(--d1)"><i class="fa-solid fa-road"></i></div><div class="body"><div class="name">Circunvalaci&oacute;n Santo Domingo</div><div class="desc">Rodeando la capital, sin entrar</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=18.4945272,-70.056127&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d1)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">122 km</span><span class="badge">1h 50m</span></div></div><div class="arrival" style="background:var(--d1)"><i class="fa-solid fa-clock"></i><span>7:50 am</span></div></div><div class="leg"><div class="node" style="background:var(--d2)"><i class="fa-solid fa-city"></i></div><div class="body"><div class="name">Puerto Plata</div><div class="desc">Llegada al mediod&iacute;a · check-in</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.7860397,-70.6882107&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d2)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">208 km</span><span class="badge">3h 54m</span></div></div><div class="arrival" style="background:var(--d2)"><i class="fa-solid fa-clock"></i><span>11:45 am</span></div></div><div class="leg"><div class="node" style="background:var(--d2)"><i class="fa-solid fa-mountain-sun"></i></div><div class="body"><div class="name">Parque Nacional Isabel de Torres</div><div class="desc">Tarde: telef&eacute;rico + Cristo Redentor + vista de la bah&iacute;a</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.7634829,-70.7105368&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d2)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a></div></div><div class="arrival" style="background:var(--d2)"><i class="fa-solid fa-clock"></i><span>2:30 pm</span></div></div><div class="leg"><div class="node" style="background:var(--d2)"><i class="fa-solid fa-sun"></i></div><div class="body"><div class="name">Malec&oacute;n de Puerto Plata</div><div class="desc">Atardecer caminando</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.7860397,-70.6882107&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d2)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a></div></div><div class="arrival" style="background:var(--d2)"><i class="fa-solid fa-clock"></i><span>5:30 pm</span></div></div></div>
+    </section>
+    
+    <section class="day" style="--dc:var(--d2)">
+      <div class="day-head">
+        <div class="day-badge">D&iacute;a<br>2</div>
+        <div class="day-hd">
+          <div class="day-title">Viernes</div>
+          <div class="day-route">Excursiones en Puerto Plata</div>
+        </div>
+        <div class="day-meta">
+          <div class="km">83 km</div>
+          <div class="tm"><i class="fa-solid fa-clock"></i><span>2h 20m</span></div>
+        </div>
+      </div>
+      <div class="legs"><div class="leg"><div class="node" style="background:var(--d2)"><i class="fa-solid fa-person-swimming"></i></div><div class="body"><div class="name">27 Charcos de Damajagua</div><div class="desc">Ma&ntilde;ana completa: caminata por los charcos con gu&iacute;as</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.7342692,-70.8191197&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d2)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">64 km</span><span class="badge">1h 30m</span></div></div><div class="arrival" style="background:var(--d2)"><i class="fa-solid fa-clock"></i><span>9:30 am</span></div></div><div class="leg"><div class="node" style="background:var(--d2)"><i class="fa-solid fa-umbrella-beach"></i></div><div class="body"><div class="name">Playa Dorada</div><div class="desc">Tarde de descanso en la playa</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.7737615,-70.6419412&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d2)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">13 km</span><span class="badge">31 min</span></div></div><div class="arrival" style="background:var(--d2)"><i class="fa-solid fa-clock"></i><span>4:30 pm</span></div></div><div class="leg"><div class="node" style="background:var(--d2)"><i class="fa-solid fa-landmark"></i></div><div class="body"><div class="name">Fortaleza San Felipe</div><div class="desc">Atardecer en la fortaleza colonial</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.8041493,-70.695962&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d2)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">6 km</span><span class="badge">19 min</span></div></div><div class="arrival" style="background:var(--d2)"><i class="fa-solid fa-clock"></i><span>6:00 pm</span></div></div></div>
+    </section>
+    
+    <section class="day" style="--dc:var(--d3)">
+      <div class="day-head">
+        <div class="day-badge">D&iacute;a<br>3</div>
+        <div class="day-hd">
+          <div class="day-title">S&aacute;bado</div>
+          <div class="day-route">Puerto Plata &rarr; Cabrera</div>
+        </div>
+        <div class="day-meta">
+          <div class="km">111 km</div>
+          <div class="tm"><i class="fa-solid fa-clock"></i><span>2h 30m</span></div>
+        </div>
+      </div>
+      <div class="legs"><div class="leg"><div class="node" style="background:var(--d3)"><i class="fa-solid fa-pizza-slice"></i></div><div class="body"><div class="name">Bill Pizza (Sos&uacute;a)</div><div class="desc">Parada de comida en la costa</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.7428926,-70.5227295&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d3)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">24 km</span><span class="badge">36 min</span></div></div><div class="arrival" style="background:var(--d3)"><i class="fa-solid fa-clock"></i><span>9:10 am</span></div></div><div class="leg"><div class="node" style="background:var(--d3)"><i class="fa-solid fa-cheese"></i></div><div class="body"><div class="name">Queso de Hoja Dom&iacute;nguez</div><div class="desc">Parada de queso artesanal</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.6150549,-70.1793573&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d3)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">52 km</span><span class="badge">1h 17m</span></div></div><div class="arrival" style="background:var(--d3)"><i class="fa-solid fa-clock"></i><span>10:45 am</span></div></div><div class="leg"><div class="node" style="background:var(--d3)"><i class="fa-solid fa-water"></i></div><div class="body"><div class="name">Playa Preciosa</div><div class="desc">Playa virgen</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.6779941,-70.0003494&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d3)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">24 km</span><span class="badge">24 min</span></div></div><div class="arrival" style="background:var(--d3)"><i class="fa-solid fa-clock"></i><span>12:15 pm</span></div></div><div class="leg"><div class="node" style="background:var(--d3)"><i class="fa-solid fa-bed"></i></div><div class="body"><div class="name">Cabrera</div><div class="desc">Llegada · noche</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.6408987,-69.909001&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d3)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">11 km</span><span class="badge">12 min</span></div></div><div class="arrival" style="background:var(--d3)"><i class="fa-solid fa-clock"></i><span>2:30 pm</span></div></div></div>
+    </section>
+    
+    <section class="day" style="--dc:var(--d4)">
+      <div class="day-head">
+        <div class="day-badge">D&iacute;a<br>4</div>
+        <div class="day-hd">
+          <div class="day-title">Domingo</div>
+          <div class="day-route">Cabrera &rarr; La Romana</div>
+        </div>
+        <div class="day-meta">
+          <div class="km">255 km</div>
+          <div class="tm"><i class="fa-solid fa-clock"></i><span>3h 43m</span></div>
+        </div>
+      </div>
+      <div class="legs"><div class="leg"><div class="node" style="background:var(--d4)"><i class="fa-solid fa-car"></i></div><div class="body"><div class="name">Salida de Cabrera</div><div class="desc">Temprano para evitar el tr&aacute;fico de domingo</div></div><div class="arrival" style="background:var(--d4)"><i class="fa-solid fa-clock"></i><span>6:00 am</span></div></div><div class="leg"><div class="node" style="background:var(--d4)"><i class="fa-solid fa-city"></i></div><div class="body"><div class="name">Nagua</div><div class="desc">Paso por la costa noreste</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=19.3732132,-69.8539165&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d4)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">37 km</span><span class="badge">43 min</span></div></div><div class="arrival" style="background:var(--d4)"><i class="fa-solid fa-clock"></i><span>6:45 am</span></div></div><div class="leg"><div class="node" style="background:var(--d4)"><i class="fa-solid fa-flag-checkered"></i></div><div class="body"><div class="name">La Romana</div><div class="desc">Llegada final</div><div class="row"><a class="nav" href="https://www.google.com/maps/dir/?api=1&destination=18.4338645,-68.9658817&travelmode=driving" target="_blank" rel="noopener" style="color:var(--d4)"><i class="fa-solid fa-diamond-turn-right"></i><span>GPS</span></a><span class="badge">218 km</span><span class="badge">2h 59m</span></div></div><div class="arrival" style="background:var(--d4)"><i class="fa-solid fa-clock"></i><span>9:45 am</span></div></div></div>
+    </section>
+
+    <section class="summary">
+      <h2>Resumen del viaje</h2>
+      <div class="sum-row"><span class="k">Traslados entre ciudades</span><span class="v">696 km</span></div>
+      <div class="sum-row"><span class="k">Excursiones locales</span><span class="v">83 km</span></div>
+      <div class="sum-row total"><span class="k">Total</span><span class="v">779 km</span></div>
+    </section>
+
+    <div class="footnote">Distancias calculadas con Google Maps Routes API. Los tiempos no incluyen paradas ni tr&aacute;fico.</div>
+  </main>
+
+<script>
+  var hero = document.getElementById('hero');
+  var miniBar = document.getElementById('miniBar');
+  if ('IntersectionObserver' in window && hero && miniBar) {
+    var obs = new IntersectionObserver(function(entries) {
+      miniBar.classList.toggle('show', !entries[0].isIntersecting);
+    }, { threshold: 0 });
+    obs.observe(hero);
+  }
+  var revealEls = document.querySelectorAll('.day, .summary, .section-title');
+  if ('IntersectionObserver' in window) {
+    var ro = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(function(el) { ro.observe(el); });
+  } else {
+    revealEls.forEach(function(el) { el.classList.add('in'); });
+  }
+</script>
+</body>
+</html>
