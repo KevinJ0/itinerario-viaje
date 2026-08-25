@@ -588,7 +588,6 @@ function initMap(id) {
   maps[id] = mp;
   var pts = decodePolyline(d.poly);
   var fitPts = pts;
-  if (id === 'norte') { fitPts = pts.filter(function (q) { return q[0] > 19.4; }); }
   L.polyline(pts, { color: d.color, weight: 4, opacity: .9 }).addTo(mp);
   d.points.forEach(function (p) {
     var m;
