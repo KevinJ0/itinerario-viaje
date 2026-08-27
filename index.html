@@ -146,6 +146,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   .wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
   .wrap > .section-title,.wrap > .summary,.wrap > .mapcard{grid-column:1 / -1}
 }
+.presupuesto-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.presupuesto-head h2{margin:0}
+.people-ctrl{display:flex;align-items:center;gap:6px}
+.pbtn{width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);background:transparent;color:var(--accent);font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.pbtn:hover{background:var(--accent);color:#fff}
+.pval{font-size:18px;font-weight:700;color:var(--accent);min-width:20px;text-align:center}
+.plabel{font-size:13px;opacity:.7}
 </style>
 </head>
 <body>
@@ -222,19 +229,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <div class="sum-row total"><span class="k">Total</span><span class="v">354 km</span></div>
     </section>
 
-    <section class="summary" data-sec="presupuesto">
-      <h2>Presupuesto (3 personas)</h2>
-      <div class="sum-row"><span class="k">Combustible</span><span class="v">RD$3,000</span></div>
-      <div class="sum-row"><span class="k">Peajes</span><span class="v">RD$300</span></div>
-      <div class="sum-row"><span class="k">Alojamiento (1 noche Miches, US$63)</span><span class="v">RD$3,800</span></div>
-      <div class="sum-row"><span class="k">Entradas (Monta&ntilde;a Redonda)</span><span class="v">RD$1,000</span></div>
-      <div class="sum-row"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$1,000</span></div>
-      <div class="sum-row"><span class="k">Comida (2 d&iacute;as, los 3)</span><span class="v">RD$2,000</span></div>
-      <div class="sum-row"><span class="k">Bebidas + snacks</span><span class="v">RD$1,000</span></div>
-      <div class="sum-row total"><span class="k">Fondo com&uacute;n</span><span class="v">RD$12,100</span></div>
-      <div class="sum-row"><span class="k">Ustedes (2/3)</span><span class="v">RD$8,067</span></div>
-      <div class="sum-row"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$4,033</span></div>
-      <div class="sum-row total"><span class="k">Total</span><span class="v">RD$12,100</span></div>
+    <section class="summary" data-sec="presupuesto" id="presupuesto-este">
+      <div class="presupuesto-head">
+        <h2>Presupuesto</h2>
+        <div class="people-ctrl">
+          <button class="pbtn" onclick="changePeople('este',-1)">&minus;</button>
+          <span class="pval" id="pval-este">3</span>
+          <button class="pbtn" onclick="changePeople('este',1)">+</button>
+          <span class="plabel">personas</span>
+        </div>
+      </div>
+      <div class="sum-row" data-base="3000" data-type="flat"><span class="k">Combustible</span><span class="v">RD$3,000</span></div>
+      <div class="sum-row" data-base="300" data-type="flat"><span class="k">Peajes</span><span class="v">RD$300</span></div>
+      <div class="sum-row" data-base="3800" data-type="flat"><span class="k">Alojamiento (1 noche Miches, US$63)</span><span class="v">RD$3,800</span></div>
+      <div class="sum-row" data-base="1000" data-type="per"><span class="k">Entradas (Monta&ntilde;a Redonda)</span><span class="v">RD$1,000</span></div>
+      <div class="sum-row" data-base="1000" data-type="flat"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$1,000</span></div>
+      <div class="sum-row" data-base="2000" data-type="per"><span class="k">Comida (2 d&iacute;as)</span><span class="v">RD$2,000</span></div>
+      <div class="sum-row" data-base="1000" data-type="per"><span class="k">Bebidas + snacks</span><span class="v">RD$1,000</span></div>
+      <div class="sum-row total" id="este-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$12,100</span></div>
+      <div class="sum-row" id="este-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$8,067</span></div>
+      <div class="sum-row" id="este-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$4,033</span></div>
+      <div class="sum-row total" id="este-total"><span class="k">Total</span><span class="v">RD$12,100</span></div>
     </section>
 
     
@@ -330,18 +345,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <div class="sum-row total"><span class="k">Total</span><span class="v">720 km</span></div>
     </section>
 
-    <section class="summary" data-sec="presupuesto">
-      <h2>Presupuesto (3 personas)</h2>
-      <div class="sum-row"><span class="k">Combustible</span><span class="v">RD$3,800</span></div>
-      <div class="sum-row"><span class="k">Peajes</span><span class="v">RD$1,000</span></div>
-      <div class="sum-row"><span class="k">Alojamiento (2 noches)</span><span class="v">RD$5,900</span></div>
-      <div class="sum-row"><span class="k">Entradas</span><span class="v">RD$900</span></div>
-      <div class="sum-row"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$2,000</span></div>
-      <div class="sum-row"><span class="k">Comida (3 d&iacute;as, los 3)</span><span class="v">RD$3,000</span></div>
-      <div class="sum-row total"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,600</span></div>
-      <div class="sum-row"><span class="k">Ustedes (2/3)</span><span class="v">RD$11,067</span></div>
-      <div class="sum-row"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$5,533</span></div>
-      <div class="sum-row total"><span class="k">Total</span><span class="v">RD$16,600</span></div>
+    <section class="summary" data-sec="presupuesto" id="presupuesto-norte">
+      <div class="presupuesto-head">
+        <h2>Presupuesto</h2>
+        <div class="people-ctrl">
+          <button class="pbtn" onclick="changePeople('norte',-1)">&minus;</button>
+          <span class="pval" id="pval-norte">3</span>
+          <button class="pbtn" onclick="changePeople('norte',1)">+</button>
+          <span class="plabel">personas</span>
+        </div>
+      </div>
+      <div class="sum-row" data-base="3800" data-type="flat"><span class="k">Combustible</span><span class="v">RD$3,800</span></div>
+      <div class="sum-row" data-base="1000" data-type="flat"><span class="k">Peajes</span><span class="v">RD$1,000</span></div>
+      <div class="sum-row" data-base="5900" data-type="flat"><span class="k">Alojamiento (2 noches)</span><span class="v">RD$5,900</span></div>
+      <div class="sum-row" data-base="900" data-type="per"><span class="k">Entradas</span><span class="v">RD$900</span></div>
+      <div class="sum-row" data-base="2000" data-type="flat"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$2,000</span></div>
+      <div class="sum-row" data-base="3000" data-type="per"><span class="k">Comida (3 d&iacute;as)</span><span class="v">RD$3,000</span></div>
+      <div class="sum-row total" id="norte-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,600</span></div>
+      <div class="sum-row" id="norte-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$11,067</span></div>
+      <div class="sum-row" id="norte-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$5,533</span></div>
+      <div class="sum-row total" id="norte-total"><span class="k">Total</span><span class="v">RD$16,600</span></div>
     </section>
 
     
@@ -436,18 +459,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <div class="sum-row total"><span class="k">Total</span><span class="v">730 km</span></div>
     </section>
 
-    <section class="summary" data-sec="presupuesto">
-      <h2>Presupuesto (3 personas)</h2>
-      <div class="sum-row"><span class="k">Combustible</span><span class="v">RD$3,700</span></div>
-      <div class="sum-row"><span class="k">Peajes</span><span class="v">RD$800</span></div>
-      <div class="sum-row"><span class="k">Alojamiento (2 noches)</span><span class="v">RD$7,200</span></div>
-      <div class="sum-row"><span class="k">Entradas</span><span class="v">RD$0</span></div>
-      <div class="sum-row"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$2,000</span></div>
-      <div class="sum-row"><span class="k">Comida (3 d&iacute;as, los 3)</span><span class="v">RD$3,000</span></div>
-      <div class="sum-row total"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,700</span></div>
-      <div class="sum-row"><span class="k">Ustedes (2/3)</span><span class="v">RD$11,133</span></div>
-      <div class="sum-row"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$5,567</span></div>
-      <div class="sum-row total"><span class="k">Total</span><span class="v">RD$16,700</span></div>
+    <section class="summary" data-sec="presupuesto" id="presupuesto-sur">
+      <div class="presupuesto-head">
+        <h2>Presupuesto</h2>
+        <div class="people-ctrl">
+          <button class="pbtn" onclick="changePeople('sur',-1)">&minus;</button>
+          <span class="pval" id="pval-sur">3</span>
+          <button class="pbtn" onclick="changePeople('sur',1)">+</button>
+          <span class="plabel">personas</span>
+        </div>
+      </div>
+      <div class="sum-row" data-base="3700" data-type="flat"><span class="k">Combustible</span><span class="v">RD$3,700</span></div>
+      <div class="sum-row" data-base="800" data-type="flat"><span class="k">Peajes</span><span class="v">RD$800</span></div>
+      <div class="sum-row" data-base="7200" data-type="flat"><span class="k">Alojamiento (2 noches)</span><span class="v">RD$7,200</span></div>
+      <div class="sum-row" data-base="0" data-type="per"><span class="k">Entradas</span><span class="v">RD$0</span></div>
+      <div class="sum-row" data-base="2000" data-type="flat"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$2,000</span></div>
+      <div class="sum-row" data-base="3000" data-type="per"><span class="k">Comida (3 d&iacute;as)</span><span class="v">RD$3,000</span></div>
+      <div class="sum-row total" id="sur-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,700</span></div>
+      <div class="sum-row" id="sur-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$11,133</span></div>
+      <div class="sum-row" id="sur-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$5,567</span></div>
+      <div class="sum-row total" id="sur-total"><span class="k">Total</span><span class="v">RD$16,700</span></div>
     </section>
 
     
@@ -466,6 +497,43 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   </div>
 
 <script>
+  function fmt(n) { return 'RD$' + n.toLocaleString('en-US'); }
+  function calcBudget(id, n) {
+    var section = document.getElementById('presupuesto-' + id);
+    if (!section) return;
+    var flatTotal = 0;
+    section.querySelectorAll('.sum-row[data-type="flat"]').forEach(function(r) {
+      flatTotal += parseInt(r.dataset.base);
+    });
+    var perTotal = 0;
+    section.querySelectorAll('.sum-row[data-type="per"]').forEach(function(r) {
+      perTotal += parseInt(r.dataset.base);
+    });
+    var scaled = Math.round(perTotal * n / 3);
+    var fondo = flatTotal + scaled;
+    var individual = Math.round(fondo / n);
+    var couple = fondo - individual * (n - 2);
+    section.querySelectorAll('.sum-row[data-type="per"] .v').forEach(function(v, i) {
+      var bases = section.querySelectorAll('.sum-row[data-type="per"]');
+      v.textContent = fmt(Math.round(parseInt(bases[i].dataset.base) * n / 3));
+    });
+    document.getElementById(id + '-fondo').querySelector('.v').textContent = fmt(fondo);
+    var uEl = document.getElementById(id + '-ustedes');
+    uEl.querySelector('.v').textContent = fmt(couple);
+    uEl.querySelector('.k').innerHTML = 'Ustedes (2/' + n + ')';
+    var oEl = document.getElementById(id + '-otra');
+    oEl.querySelector('.v').textContent = fmt(individual);
+    oEl.querySelector('.k').innerHTML = n === 3 ? 'Tu mam&aacute; (1/' + n + ')' : 'Por persona (1/' + n + ')';
+    document.getElementById(id + '-total').querySelector('.v').textContent = fmt(fondo);
+    document.getElementById('pval-' + id).textContent = n;
+  }
+  function changePeople(id, delta) {
+    var el = document.getElementById('pval-' + id);
+    var n = parseInt(el.textContent) + delta;
+    if (n < 2) n = 2;
+    if (n > 10) n = 10;
+    calcBudget(id, n);
+  }
   var ro = null;
   var pairs = {
     este:  { hero: document.getElementById('heroEste'),  bar: document.getElementById('miniBarEste') },
