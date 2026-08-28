@@ -104,6 +104,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .mod-badge.show{display:flex}
 .mod-badge button{margin-left:auto;border:1px solid currentColor;background:transparent;color:inherit;border-radius:6px;padding:2px 8px;font-size:.75rem;cursor:pointer}
 .mod-badge button:hover{background:rgba(255,152,0,.2)}
+.sum-row.modified{border-left:3px solid #ff9800;padding-left:10px;background:rgba(255,152,0,.06)}
+.sum-row.modified .v{color:#ff9800}
 .sum-row.total{margin-top:6px}
 .sum-row.total .v{font-size:1.15rem;color:var(--teal);animation:colorPulse 2.6s ease-in-out infinite}
 .footnote{text-align:center;font-size:.72rem;color:var(--muted);margin-top:22px;padding:0 12px}
@@ -588,18 +590,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       });
     });
   });
-  function isModified(id) {
+  function updateModBadge(id) {
     var section = document.getElementById('presupuesto-' + id);
+    var b = document.getElementById('mod-' + id);
     var modified = false;
     section.querySelectorAll('.sum-row[data-base]').forEach(function(r) {
-      if (parseInt(r.dataset.base) !== parseInt(r.dataset.base0)) { modified = true; }
+      var m = parseInt(r.dataset.base) !== parseInt(r.dataset.base0);
+      r.classList.toggle('modified', m);
+      if (m) { modified = true; }
     });
-    return modified;
-  }
-  function updateModBadge(id) {
-    var b = document.getElementById('mod-' + id);
-    if (!b) { return; }
-    b.classList.toggle('show', isModified(id));
+    if (b) { b.classList.toggle('show', modified); }
   }
   function resetBases(id) {
     var section = document.getElementById('presupuesto-' + id);
