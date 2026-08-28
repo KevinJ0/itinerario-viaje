@@ -533,6 +533,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     if (n < 2) n = 2;
     if (n > 10) n = 10;
     calcBudget(id, n);
+    localStorage.setItem('itv_people_' + id, n);
   }
   var ro = null;
   var pairs = {
@@ -591,6 +592,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
   function activate(id) {
     var sec = currentSection();
+    localStorage.setItem('itv_itin', id);
     document.querySelectorAll('.itin').forEach(function(c) {
       c.classList.toggle('active', c.id === 'itin-' + id);
     });
@@ -711,9 +713,17 @@ function initMap(id) {
     ['este', 'norte', 'sur'].forEach(function(id) { if (maps[id]) { maps[id].invalidateSize(); } });
   });
 
+  ['este', 'norte', 'sur'].forEach(function(id) {
+    var n = parseInt(localStorage.getItem('itv_people_' + id) || '3');
+    if (!n || n < 2) { n = 2; }
+    if (n > 10) { n = 10; }
+    calcBudget(id, n);
+  });
+
+  var savedItin = localStorage.getItem('itv_itin');
+  var startItin = (savedItin && ['este', 'norte', 'sur'].indexOf(savedItin) !== -1) ? savedItin : 'este';
   observeReveal();
-  setupMini('este');
-  initMap('este');
+  activate(startItin);
 </script>
 </body>
 </html>
