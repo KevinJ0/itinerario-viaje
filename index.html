@@ -97,6 +97,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .sum-row:last-of-type{border-bottom:none}
 .sum-row .k{color:var(--muted);font-weight:600}
 .sum-row .v{font-weight:800;text-align:right}
+.v-edit{width:86px;background:transparent;border:1px solid transparent;color:inherit;font:inherit;font-weight:800;text-align:right;border-radius:4px;padding:2px 4px;-moz-appearance:textfield}
+.v-edit:focus{border-color:var(--accent);background:rgba(255,255,255,.08);outline:none}
+.v-edit::-webkit-inner-spin-button,.v-edit::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.mod-badge{display:none;align-items:center;gap:8px;margin:6px 0;padding:6px 10px;border-radius:8px;background:rgba(255,152,0,.15);color:#ff9800;font-size:.8rem;font-weight:700}
+.mod-badge.show{display:flex}
+.mod-badge button{margin-left:auto;border:1px solid currentColor;background:transparent;color:inherit;border-radius:6px;padding:2px 8px;font-size:.75rem;cursor:pointer}
+.mod-badge button:hover{background:rgba(255,152,0,.2)}
 .sum-row.total{margin-top:6px}
 .sum-row.total .v{font-size:1.15rem;color:var(--teal);animation:colorPulse 2.6s ease-in-out infinite}
 .footnote{text-align:center;font-size:.72rem;color:var(--muted);margin-top:22px;padding:0 12px}
@@ -239,13 +246,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
           <span class="plabel">personas</span>
         </div>
       </div>
-      <div class="sum-row" data-base="3000" data-type="flat"><span class="k">Combustible</span><span class="v">RD$3,000</span></div>
-      <div class="sum-row" data-base="300" data-type="flat"><span class="k">Peajes</span><span class="v">RD$300</span></div>
-      <div class="sum-row" data-base="3800" data-type="flat"><span class="k">Alojamiento (1 noche Miches, US$63)</span><span class="v">RD$3,800</span></div>
-      <div class="sum-row" data-base="1000" data-type="per"><span class="k">Entradas (Monta&ntilde;a Redonda)</span><span class="v">RD$1,000</span></div>
-      <div class="sum-row" data-base="1000" data-type="flat"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$1,000</span></div>
-      <div class="sum-row" data-base="2000" data-type="per"><span class="k">Comida (2 d&iacute;as)</span><span class="v">RD$2,000</span></div>
-      <div class="sum-row" data-base="1000" data-type="per"><span class="k">Bebidas + snacks</span><span class="v">RD$1,000</span></div>
+      <div class="mod-badge" id="mod-este"><i class="fa-solid fa-pen"></i>Precios modificados por ti <button type="button" onclick="resetBases('este')">Restaurar</button></div>
+
+      <div class="sum-row" data-base="3000" data-type="flat" data-base0="3000"><span class="k">Combustible</span><span class="v">RD$<input class="v-edit" type="number" value="3000" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="300" data-type="flat" data-base0="300"><span class="k">Peajes</span><span class="v">RD$<input class="v-edit" type="number" value="300" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="3800" data-type="flat" data-base0="3800"><span class="k">Alojamiento (1 noche Miches, US$63)</span><span class="v">RD$<input class="v-edit" type="number" value="3800" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="1000" data-type="per" data-base0="1000"><span class="k">Entradas (Monta&ntilde;a Redonda)</span><span class="v">RD$<input class="v-edit" type="number" value="1000" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="1000" data-type="flat" data-base0="1000"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$<input class="v-edit" type="number" value="1000" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="2000" data-type="per" data-base0="2000"><span class="k">Comida (2 d&iacute;as)</span><span class="v">RD$<input class="v-edit" type="number" value="2000" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="1000" data-type="per" data-base0="1000"><span class="k">Bebidas + snacks</span><span class="v">RD$<input class="v-edit" type="number" value="1000" min="0" step="100"></span></div>
       <div class="sum-row total" id="este-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$12,100</span></div>
       <div class="sum-row" id="este-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$8,067</span></div>
       <div class="sum-row" id="este-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$4,033</span></div>
@@ -355,12 +364,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
           <span class="plabel">personas</span>
         </div>
       </div>
-      <div class="sum-row" data-base="3800" data-type="flat"><span class="k">Combustible</span><span class="v">RD$3,800</span></div>
-      <div class="sum-row" data-base="1000" data-type="flat"><span class="k">Peajes</span><span class="v">RD$1,000</span></div>
-      <div class="sum-row" data-base="5900" data-type="flat"><span class="k">Alojamiento (2 noches)</span><span class="v">RD$5,900</span></div>
-      <div class="sum-row" data-base="900" data-type="per"><span class="k">Entradas</span><span class="v">RD$900</span></div>
-      <div class="sum-row" data-base="2000" data-type="flat"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$2,000</span></div>
-      <div class="sum-row" data-base="3000" data-type="per"><span class="k">Comida (3 d&iacute;as)</span><span class="v">RD$3,000</span></div>
+      <div class="mod-badge" id="mod-norte"><i class="fa-solid fa-pen"></i>Precios modificados por ti <button type="button" onclick="resetBases('norte')">Restaurar</button></div>
+
+      <div class="sum-row" data-base="3800" data-type="flat" data-base0="3800"><span class="k">Combustible</span><span class="v">RD$<input class="v-edit" type="number" value="3800" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="1000" data-type="flat" data-base0="1000"><span class="k">Peajes</span><span class="v">RD$<input class="v-edit" type="number" value="1000" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="5900" data-type="flat" data-base0="5900"><span class="k">Alojamiento (2 noches)</span><span class="v">RD$<input class="v-edit" type="number" value="5900" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="900" data-type="per" data-base0="900"><span class="k">Entradas</span><span class="v">RD$<input class="v-edit" type="number" value="900" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="2000" data-type="flat" data-base0="2000"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$<input class="v-edit" type="number" value="2000" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="3000" data-type="per" data-base0="3000"><span class="k">Comida (3 d&iacute;as)</span><span class="v">RD$<input class="v-edit" type="number" value="3000" min="0" step="100"></span></div>
       <div class="sum-row total" id="norte-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,600</span></div>
       <div class="sum-row" id="norte-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$11,067</span></div>
       <div class="sum-row" id="norte-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$5,533</span></div>
@@ -469,12 +480,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
           <span class="plabel">personas</span>
         </div>
       </div>
-      <div class="sum-row" data-base="3700" data-type="flat"><span class="k">Combustible</span><span class="v">RD$3,700</span></div>
-      <div class="sum-row" data-base="800" data-type="flat"><span class="k">Peajes</span><span class="v">RD$800</span></div>
-      <div class="sum-row" data-base="7200" data-type="flat"><span class="k">Alojamiento (2 noches)</span><span class="v">RD$7,200</span></div>
-      <div class="sum-row" data-base="0" data-type="per"><span class="k">Entradas</span><span class="v">RD$0</span></div>
-      <div class="sum-row" data-base="2000" data-type="flat"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$2,000</span></div>
-      <div class="sum-row" data-base="3000" data-type="per"><span class="k">Comida (3 d&iacute;as)</span><span class="v">RD$3,000</span></div>
+      <div class="mod-badge" id="mod-sur"><i class="fa-solid fa-pen"></i>Precios modificados por ti <button type="button" onclick="resetBases('sur')">Restaurar</button></div>
+
+      <div class="sum-row" data-base="3700" data-type="flat" data-base0="3700"><span class="k">Combustible</span><span class="v">RD$<input class="v-edit" type="number" value="3700" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="800" data-type="flat" data-base0="800"><span class="k">Peajes</span><span class="v">RD$<input class="v-edit" type="number" value="800" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="7200" data-type="flat" data-base0="7200"><span class="k">Alojamiento (2 noches)</span><span class="v">RD$<input class="v-edit" type="number" value="7200" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="0" data-type="per" data-base0="0"><span class="k">Entradas</span><span class="v">RD$<input class="v-edit" type="number" value="0" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="2000" data-type="flat" data-base0="2000"><span class="k">Extras (colch&oacute;n)</span><span class="v">RD$<input class="v-edit" type="number" value="2000" min="0" step="100"></span></div>
+      <div class="sum-row" data-base="3000" data-type="per" data-base0="3000"><span class="k">Comida (3 d&iacute;as)</span><span class="v">RD$<input class="v-edit" type="number" value="3000" min="0" step="100"></span></div>
       <div class="sum-row total" id="sur-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,700</span></div>
       <div class="sum-row" id="sur-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$11,133</span></div>
       <div class="sum-row" id="sur-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$5,567</span></div>
@@ -513,9 +526,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     var fondo = flatTotal + scaled;
     var individual = Math.round(fondo / n);
     var couple = fondo - individual * (n - 2);
-    section.querySelectorAll('.sum-row[data-type="per"] .v').forEach(function(v, i) {
+    section.querySelectorAll('.sum-row[data-type="flat"] .v-edit').forEach(function(inp, i) {
+      var bases = section.querySelectorAll('.sum-row[data-type="flat"]');
+      inp.value = bases[i].dataset.base;
+    });
+    section.querySelectorAll('.sum-row[data-type="per"] .v-edit').forEach(function(inp, i) {
       var bases = section.querySelectorAll('.sum-row[data-type="per"]');
-      v.textContent = fmt(Math.round(parseInt(bases[i].dataset.base) * n / 3));
+      inp.value = Math.round(parseInt(bases[i].dataset.base) * n / 3);
     });
     document.getElementById(id + '-fondo').querySelector('.v').textContent = fmt(fondo);
     var uEl = document.getElementById(id + '-ustedes');
@@ -534,6 +551,65 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     if (n > 10) n = 10;
     calcBudget(id, n);
     localStorage.setItem('itv_people_' + id, n);
+  }
+  function saveBases(id) {
+    var section = document.getElementById('presupuesto-' + id);
+    var bases = [];
+    section.querySelectorAll('.sum-row[data-base]').forEach(function(r) {
+      bases.push(parseInt(r.dataset.base) || 0);
+    });
+    localStorage.setItem('itv_bases_' + id, JSON.stringify(bases));
+  }
+  function loadBases(id) {
+    var raw = localStorage.getItem('itv_bases_' + id);
+    if (!raw) { return; }
+    try {
+      var bases = JSON.parse(raw);
+      var section = document.getElementById('presupuesto-' + id);
+      var rows = section.querySelectorAll('.sum-row[data-base]');
+      rows.forEach(function(r, i) {
+        if (i < bases.length && typeof bases[i] === 'number') {
+          r.dataset.base = bases[i];
+        }
+      });
+    } catch (e) {}
+  }
+  ['este', 'norte', 'sur'].forEach(function(id) {
+    var section = document.getElementById('presupuesto-' + id);
+    section.querySelectorAll('.v-edit').forEach(function(inp) {
+      inp.addEventListener('input', function() {
+        var row = inp.closest('.sum-row');
+        var n = parseInt(document.getElementById('pval-' + id).textContent);
+        var val = Math.max(0, Math.round(parseFloat(inp.value) || 0));
+        row.dataset.base = row.dataset.type === 'per' ? Math.round(val * 3 / n) : val;
+        calcBudget(id, n);
+        saveBases(id);
+        updateModBadge(id);
+      });
+    });
+  });
+  function isModified(id) {
+    var section = document.getElementById('presupuesto-' + id);
+    var modified = false;
+    section.querySelectorAll('.sum-row[data-base]').forEach(function(r) {
+      if (parseInt(r.dataset.base) !== parseInt(r.dataset.base0)) { modified = true; }
+    });
+    return modified;
+  }
+  function updateModBadge(id) {
+    var b = document.getElementById('mod-' + id);
+    if (!b) { return; }
+    b.classList.toggle('show', isModified(id));
+  }
+  function resetBases(id) {
+    var section = document.getElementById('presupuesto-' + id);
+    section.querySelectorAll('.sum-row[data-base]').forEach(function(r) {
+      r.dataset.base = r.dataset.base0;
+    });
+    var n = parseInt(document.getElementById('pval-' + id).textContent);
+    calcBudget(id, n);
+    saveBases(id);
+    updateModBadge(id);
   }
   var ro = null;
   var pairs = {
@@ -714,10 +790,12 @@ function initMap(id) {
   });
 
   ['este', 'norte', 'sur'].forEach(function(id) {
+    loadBases(id);
     var n = parseInt(localStorage.getItem('itv_people_' + id) || '3');
     if (!n || n < 2) { n = 2; }
     if (n > 10) { n = 10; }
     calcBudget(id, n);
+    updateModBadge(id);
   });
 
   var savedItin = localStorage.getItem('itv_itin');
