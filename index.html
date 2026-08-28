@@ -255,14 +255,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
       <div class="sum-row" data-base="3000" data-type="flat" data-base0="3000"><span class="k">Combustible</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('este',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="3,000"></span></div>
       <div class="sum-row" data-base="300" data-type="flat" data-base0="300"><span class="k">Peajes</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('este',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="300"></span></div>
-      <div class="sum-row" data-base="3800" data-type="flat" data-base0="3800"><span class="k">Alojamiento (1 noche Miches, US$63)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('este',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="3,800"></span></div>
+      <div class="sum-row" data-base="3800" data-type="flat" data-base0="3800" data-kind="alojamiento"><span class="k">Alojamiento (1 noche Miches, US$63)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('este',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="3,800"></span></div>
       <div class="sum-row" data-base="1000" data-type="per" data-base0="1000"><span class="k">Entradas (Monta&ntilde;a Redonda)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('este',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="1,000"></span></div>
       <div class="sum-row" data-base="1000" data-type="flat" data-base0="1000"><span class="k">Extras (colch&oacute;n)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('este',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="1,000"></span></div>
       <div class="sum-row" data-base="2000" data-type="per" data-base0="2000"><span class="k">Comida (2 d&iacute;as)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('este',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="2,000"></span></div>
       <div class="sum-row" data-base="1000" data-type="per" data-base0="1000"><span class="k">Bebidas + snacks</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('este',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="1,000"></span></div>
       <div class="sum-row total" id="este-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$12,100</span></div>
-      <div class="sum-row" id="este-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$8,067</span></div>
-      <div class="sum-row" id="este-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$4,033</span></div>
+      <div class="sum-row" id="este-ustedes"><span class="k">Ustedes</span><span class="v">RD$8,067</span></div>
+      <div class="sum-row" id="este-otra"><span class="k">Tu mam&aacute;</span><span class="v">RD$4,033</span></div>
+      <div class="sum-row" id="este-invitado" style="display:none"><span class="k">Cada invitado</span><span class="v">RD$0</span></div>
       <div class="sum-row total" id="este-total"><span class="k">Total</span><span class="v">RD$12,100</span></div>
     </section>
 
@@ -373,13 +374,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
       <div class="sum-row" data-base="3800" data-type="flat" data-base0="3800"><span class="k">Combustible</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="3,800"></span></div>
       <div class="sum-row" data-base="1000" data-type="flat" data-base0="1000"><span class="k">Peajes</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="1,000"></span></div>
-      <div class="sum-row" data-base="5900" data-type="flat" data-base0="5900"><span class="k">Alojamiento (2 noches)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="5,900"></span></div>
+      <div class="sum-row" data-base="5900" data-type="flat" data-base0="5900" data-kind="alojamiento"><span class="k">Alojamiento (2 noches)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="5,900"></span></div>
       <div class="sum-row" data-base="900" data-type="per" data-base0="900"><span class="k">Entradas</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="900"></span></div>
       <div class="sum-row" data-base="2000" data-type="flat" data-base0="2000"><span class="k">Extras (colch&oacute;n)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="2,000"></span></div>
       <div class="sum-row" data-base="3000" data-type="per" data-base0="3000"><span class="k">Comida (3 d&iacute;as)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="3,000"></span></div>
       <div class="sum-row total" id="norte-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,600</span></div>
-      <div class="sum-row" id="norte-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$11,067</span></div>
-      <div class="sum-row" id="norte-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$5,533</span></div>
+      <div class="sum-row" id="norte-ustedes"><span class="k">Ustedes</span><span class="v">RD$11,067</span></div>
+      <div class="sum-row" id="norte-otra"><span class="k">Tu mam&aacute;</span><span class="v">RD$5,533</span></div>
+      <div class="sum-row" id="norte-invitado" style="display:none"><span class="k">Cada invitado</span><span class="v">RD$0</span></div>
       <div class="sum-row total" id="norte-total"><span class="k">Total</span><span class="v">RD$16,600</span></div>
     </section>
 
@@ -489,13 +491,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
       <div class="sum-row" data-base="3700" data-type="flat" data-base0="3700"><span class="k">Combustible</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('sur',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="3,700"></span></div>
       <div class="sum-row" data-base="800" data-type="flat" data-base0="800"><span class="k">Peajes</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('sur',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="800"></span></div>
-      <div class="sum-row" data-base="7200" data-type="flat" data-base0="7200"><span class="k">Alojamiento (2 noches)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('sur',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="7,200"></span></div>
+      <div class="sum-row" data-base="7200" data-type="flat" data-base0="7200" data-kind="alojamiento"><span class="k">Alojamiento (2 noches)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('sur',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="7,200"></span></div>
       <div class="sum-row" data-base="0" data-type="per" data-base0="0"><span class="k">Entradas</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('sur',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="0"></span></div>
       <div class="sum-row" data-base="2000" data-type="flat" data-base0="2000"><span class="k">Extras (colch&oacute;n)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('sur',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="2,000"></span></div>
       <div class="sum-row" data-base="3000" data-type="per" data-base0="3000"><span class="k">Comida (3 d&iacute;as)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('sur',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="3,000"></span></div>
       <div class="sum-row total" id="sur-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,700</span></div>
-      <div class="sum-row" id="sur-ustedes"><span class="k">Ustedes (2/3)</span><span class="v">RD$11,133</span></div>
-      <div class="sum-row" id="sur-otra"><span class="k">Tu mam&aacute; (1/3)</span><span class="v">RD$5,567</span></div>
+      <div class="sum-row" id="sur-ustedes"><span class="k">Ustedes</span><span class="v">RD$11,133</span></div>
+      <div class="sum-row" id="sur-otra"><span class="k">Tu mam&aacute;</span><span class="v">RD$5,567</span></div>
+      <div class="sum-row" id="sur-invitado" style="display:none"><span class="k">Cada invitado</span><span class="v">RD$0</span></div>
       <div class="sum-row total" id="sur-total"><span class="k">Total</span><span class="v">RD$16,700</span></div>
     </section>
 
@@ -520,40 +523,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   function calcBudget(id, n) {
     var section = document.getElementById('presupuesto-' + id);
     if (!section) return;
-    var flatTotal = 0;
-    section.querySelectorAll('.sum-row[data-type="flat"]').forEach(function(r) {
-      flatTotal += parseInt(r.dataset.base);
+    var alojamiento = 0;
+    var otros = 0;
+    section.querySelectorAll('.sum-row[data-base]').forEach(function(r) {
+      var v = parseInt(r.dataset.base) || 0;
+      if (r.dataset.kind === 'alojamiento') { alojamiento = v; }
+      else { otros += v; }
     });
-    var perTotal = 0;
-    section.querySelectorAll('.sum-row[data-type="per"]').forEach(function(r) {
-      perTotal += parseInt(r.dataset.base);
+    var fondo = otros + alojamiento;
+    section.querySelectorAll('.sum-row[data-base] .v-edit').forEach(function(inp) {
+      inp.value = fmtNum(parseInt(inp.closest('.sum-row').dataset.base));
     });
-    var scaled = Math.round(perTotal * n / 3);
-    var fondo = flatTotal + scaled;
-    var individual = Math.round(fondo / n);
-    var couple = fondo - individual * (n - 2);
-    section.querySelectorAll('.sum-row[data-type="flat"] .v-edit').forEach(function(inp, i) {
-      var bases = section.querySelectorAll('.sum-row[data-type="flat"]');
-      inp.value = fmtNum(parseInt(bases[i].dataset.base));
-    });
-    section.querySelectorAll('.sum-row[data-type="per"] .v-edit').forEach(function(inp, i) {
-      var bases = section.querySelectorAll('.sum-row[data-type="per"]');
-      inp.value = fmtNum(Math.round(parseInt(bases[i].dataset.base) * n / 3));
-    });
-    document.getElementById(id + '-fondo').querySelector('.v').textContent = fmt(fondo);
     var uEl = document.getElementById(id + '-ustedes');
-    uEl.querySelector('.v').textContent = fmt(couple);
-    uEl.querySelector('.k').innerHTML = 'Ustedes (2/' + n + ')';
     var oEl = document.getElementById(id + '-otra');
-    oEl.querySelector('.v').textContent = fmt(individual);
-    oEl.querySelector('.k').innerHTML = n === 3 ? 'Tu mam&aacute; (1/' + n + ')' : 'Por persona (1/' + n + ')';
+    var iEl = document.getElementById(id + '-invitado');
+    if (n === 3) {
+      var individual = Math.round(fondo / 3);
+      var couple = fondo - individual;
+      uEl.querySelector('.v').textContent = fmt(couple);
+      oEl.querySelector('.v').textContent = fmt(individual);
+      if (iEl) { iEl.style.display = 'none'; }
+    } else {
+      var extraShare = Math.round(alojamiento / n);
+      var coupleAloja = alojamiento - (n - 2) * extraShare;
+      var mamaOtros = Math.round(otros / 3);
+      var coupleOtros = otros - mamaOtros;
+      uEl.querySelector('.v').textContent = fmt(coupleOtros + coupleAloja);
+      oEl.querySelector('.v').textContent = fmt(mamaOtros + extraShare);
+      if (iEl) {
+        iEl.querySelector('.k').textContent = 'Cada invitado (' + (n - 3) + ')';
+        iEl.querySelector('.v').textContent = fmt(extraShare);
+        iEl.style.display = '';
+      }
+    }
+    document.getElementById(id + '-fondo').querySelector('.v').textContent = fmt(fondo);
     document.getElementById(id + '-total').querySelector('.v').textContent = fmt(fondo);
     document.getElementById('pval-' + id).textContent = n;
   }
   function changePeople(id, delta) {
     var el = document.getElementById('pval-' + id);
     var n = parseInt(el.textContent) + delta;
-    if (n < 2) n = 2;
+    if (n < 3) n = 3;
     if (n > 10) n = 10;
     calcBudget(id, n);
     localStorage.setItem('itv_people_' + id, n);
@@ -587,7 +597,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
         var row = inp.closest('.sum-row');
         var n = parseInt(document.getElementById('pval-' + id).textContent);
         var val = Math.max(0, Math.round(parseFloat(inp.value.replace(/,/g, '')) || 0));
-        row.dataset.base = row.dataset.type === 'per' ? Math.round(val * 3 / n) : val;
+        row.dataset.base = val;
         calcBudget(id, n);
         saveBases(id);
         updateModBadge(id);
@@ -804,7 +814,7 @@ function initMap(id) {
   ['este', 'norte', 'sur'].forEach(function(id) {
     loadBases(id);
     var n = parseInt(localStorage.getItem('itv_people_' + id) || '3');
-    if (!n || n < 2) { n = 2; }
+    if (!n || n < 3) { n = 3; }
     if (n > 10) { n = 10; }
     calcBudget(id, n);
     updateModBadge(id);
