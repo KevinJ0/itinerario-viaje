@@ -96,6 +96,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .sum-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:.9rem}
 .sum-row:last-of-type{border-bottom:none}
 .sum-row .k{color:var(--muted);font-weight:600}
+.sum-row .opt-wrap{display:inline-flex;align-items:center;vertical-align:middle;margin-right:6px;cursor:pointer;position:relative}
+.sum-row .opt-chk{opacity:0;position:absolute;width:100%;height:100%;margin:0;cursor:pointer}
+.sum-row .opt-box{width:15px;height:15px;border:2px solid var(--muted);border-radius:4px;background:transparent;display:inline-block;transition:background .2s,border-color .2s}
+.sum-row .opt-chk:checked + .opt-box{background:var(--accent);border-color:var(--accent)}
+.sum-row .opt-chk:checked + .opt-box::after{content:'\\2713';display:block;color:#0b1020;font-size:11px;font-weight:900;line-height:13px;text-align:center}
+.sum-row .opt-tag{display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);background:rgba(255,255,255,.06);border:1px solid var(--accent);border-radius:999px;padding:1px 6px;margin-left:6px;vertical-align:middle;opacity:.85}
+.sum-row .opt-tag.off{opacity:.4}
 .sum-row .v{font-weight:800;text-align:right}
 .v-edit{width:96px;background:transparent;border:1px solid transparent;color:inherit;font:inherit;font-weight:800;text-align:right;border-radius:4px;padding:2px 4px;-moz-appearance:textfield}
 .v-edit:focus{border-color:var(--accent);background:rgba(255,255,255,.08);outline:none}
@@ -376,6 +383,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <div class="sum-row" data-base="1000" data-type="flat" data-base0="1000"><span class="k">Peajes</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="1,000"></span></div>
       <div class="sum-row" data-base="5900" data-type="flat" data-base0="5900" data-kind="alojamiento"><span class="k">Alojamiento (2 noches)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="5,900"></span></div>
       <div class="sum-row" data-base="900" data-type="per" data-base0="900"><span class="k">Entradas</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="900"></span></div>
+      <div class="sum-row opt" data-base="600" data-type="per" data-base0="600" data-opt="1"><span class="k"><label class="opt-wrap"><input type="checkbox" class="opt-chk" onchange="toggleOpt('norte',this)"><span class="opt-box"></span></label> Laguna Azul (Cabrera) <span class="opt-tag">opcional</span></span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="600"></span></div>
       <div class="sum-row" data-base="2000" data-type="flat" data-base0="2000"><span class="k">Extras (colch&oacute;n)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="2,000"></span></div>
       <div class="sum-row" data-base="3000" data-type="per" data-base0="3000"><span class="k">Comida (3 d&iacute;as)</span><span class="v"> <button class="row-reset" type="button" title="Restaurar precio" onclick="resetRow('norte',this)"><i class="fa-solid fa-rotate-left"></i></button>RD$<input class="v-edit" type="text" inputmode="numeric" value="3,000"></span></div>
       <div class="sum-row total" id="norte-fondo"><span class="k">Fondo com&uacute;n</span><span class="v">RD$16,600</span></div>
@@ -527,6 +535,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     var otros = 0;
     section.querySelectorAll('.sum-row[data-base]').forEach(function(r) {
       var v = parseInt(r.dataset.base) || 0;
+      if (r.dataset.opt === '1') {
+        var chk = r.querySelector('.opt-chk');
+        if (!(chk && chk.checked)) { return; }
+      }
       if (r.dataset.kind === 'alojamiento') { alojamiento = v; }
       else { otros += v; }
     });
@@ -632,6 +644,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     calcBudget(id, n);
     saveBases(id);
     updateModBadge(id);
+  }
+  function toggleOpt(id, chk) {
+    var row = chk.closest('.sum-row');
+    var tag = row.querySelector('.opt-tag');
+    if (tag) { tag.classList.toggle('off', !chk.checked); }
+    var n = parseInt(document.getElementById('pval-' + id).textContent);
+    calcBudget(id, n);
+    saveOpts(id);
+  }
+  function saveOpts(id) {
+    var section = document.getElementById('presupuesto-' + id);
+    var arr = [];
+    section.querySelectorAll('.sum-row[data-opt="1"]').forEach(function(r) {
+      var c = r.querySelector('.opt-chk');
+      arr.push(c && c.checked ? 1 : 0);
+    });
+    localStorage.setItem('itv_opts_' + id, JSON.stringify(arr));
+  }
+  function loadOpts(id) {
+    var raw = localStorage.getItem('itv_opts_' + id);
+    if (raw === null) {
+      sectionSyncOptDefaults(id);
+      return;
+    }
+    try {
+      var arr = JSON.parse(raw);
+      var section = document.getElementById('presupuesto-' + id);
+      section.querySelectorAll('.sum-row[data-opt="1"]').forEach(function(r, i) {
+        var c = r.querySelector('.opt-chk');
+        if (c && i < arr.length) { c.checked = !!arr[i]; }
+        var tag = r.querySelector('.opt-tag');
+        if (tag) { tag.classList.toggle('off', !(c && c.checked)); }
+      });
+    } catch (e) {}
+  }
+  function sectionSyncOptDefaults(id) {
+    var section = document.getElementById('presupuesto-' + id);
+    section.querySelectorAll('.sum-row[data-opt="1"]').forEach(function(r) {
+      var c = r.querySelector('.opt-chk');
+      var tag = r.querySelector('.opt-tag');
+      if (c) { c.checked = false; }
+      if (tag) { tag.classList.add('off'); }
+    });
   }
   var ro = null;
   var pairs = {
@@ -813,6 +868,7 @@ function initMap(id) {
 
   ['este', 'norte', 'sur'].forEach(function(id) {
     loadBases(id);
+    loadOpts(id);
     var n = parseInt(localStorage.getItem('itv_people_' + id) || '3');
     if (!n || n < 3) { n = 3; }
     if (n > 10) { n = 10; }
